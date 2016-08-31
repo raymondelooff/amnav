@@ -20,7 +20,7 @@ class AmNavPlugin extends BasePlugin
 
     public function getReleaseFeedUrl()
     {
-        return 'https://raw.githubusercontent.com/am-impact/amnav/master/releases.json';
+        return 'https://raw.githubusercontent.com/recranet/amnav/master/releases.json';
     }
 
     public function getVersion()
