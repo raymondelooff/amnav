@@ -751,7 +751,7 @@ class AmNavService extends BaseApplicationComponent
             // First
             if ($index == 0) {
                 $childClasses[] = $this->_getParam('classFirst', 'first');
-                $breadcrumbs .= sprintf("\n" . '<li%1$s itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="%2$s" title="%3$s" itemprop="item"><span itemprop="name">%3$s</span></a><meta itemprop="position" content="%4$s" /></li>',
+                $breadcrumbs .= sprintf("\n" . '<li%1$s itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="%2$s" title="%3$s" itemprop="item"><span itemprop="name">%3$s</span><meta itemprop="position" content="%4$s" /></a></li>',
                     $childClasses ? ' class="' . implode(' ', $childClasses) . '"' : '',
                     $nodeUrl,
                     $this->_getParam('renameHome', $nodeTitle),
@@ -762,24 +762,25 @@ class AmNavService extends BaseApplicationComponent
             elseif ($index == $length - 1)
             {
                 $childClasses[] = $this->_getParam('classLast', 'last');
-                $breadcrumb = sprintf('<span property="v:title">%1$s</span>',
-                    $nodeTitle
-                );
                 if ($this->_getParam('lastIsLink', false)) {
                     $breadcrumb = sprintf('<a href="%1$s" title="%2$s" itemprop="item"><span itemprop="name">%2$s</span><meta itemprop="position" content="%3$s" /></a>',
                         $nodeUrl,
                         $nodeTitle,
                         ($index + 1)
                     );
+                } else {
+                    $breadcrumb = sprintf('<span itemprop="item"><span itemprop="name">%1$s</span><meta itemprop="position" content="%2$s" /></span>',
+                        $nodeTitle,
+                        ($index + 1)
+                    );
                 }
-                $breadcrumbs .= sprintf("\n" . '<li%1$s itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="item">%2$s</span><meta itemprop="position" content="%3$s" /></li>',
+                $breadcrumbs .= sprintf("\n" . '<li%1$s itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">%2$s</li>',
                     $childClasses ? ' class="' . implode(' ', $childClasses) . '"' : '',
-                    $breadcrumb,
-                    ($index + 1)
+                    $breadcrumb
                 );
             }
             else {
-                $breadcrumbs .= sprintf("\n" . '<li%1$s itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="%2$s" title="%3$s" itemprop="item"><span itemprop="name">%3$s</span></a><meta itemprop="position" content="%4$s" /></li>',
+                $breadcrumbs .= sprintf("\n" . '<li%1$s itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="%2$s" title="%3$s" itemprop="item"><span itemprop="name">%3$s</span><meta itemprop="position" content="%4$s" /></a></li>',
                     $childClasses ? ' class="' . implode(' ', $childClasses) . '"' : '',
                     $nodeUrl,
                     $nodeTitle,
