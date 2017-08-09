@@ -354,6 +354,17 @@ class AmNavService extends BaseApplicationComponent
     }
 
     /**
+     * Get breadcrumbs without HTML.
+     *
+     * @return array
+     */
+    public function getBreadcrumbsRaw()
+    {
+        // Return the active URI elements
+        return $this->_getActiveElements();
+    }
+
+    /**
      * Set parameters for the navigation HTML output.
      *
      * @param array $params
@@ -728,7 +739,7 @@ class AmNavService extends BaseApplicationComponent
         }
 
         foreach ($nodes as $index => $node) {
-            $nodeTitle = is_array($node) ? (isset($node['title']) ? $node['title'] : Craft::t('Unknown')) : $node->title;
+            $nodeTitle = is_array($node) ? (isset($node['title']) ? $node['title'] : Craft::t('Unknown')) : $node->__toString();
             $nodeUrl = is_array($node) ? (isset($node['url']) ? $node['url'] : '') : $node->url;
 
             // Gather node classes
